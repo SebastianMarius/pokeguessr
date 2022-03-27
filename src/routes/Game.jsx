@@ -4,6 +4,8 @@ import Container from '@mui/material/Container';
 import {useEffect, useState} from "react";
 import PokemonCard from "../components/PokemonCard";
 import {capitalizeFirstLetter} from "../utils/utils";
+import {Typography} from "@mui/material";
+
 
 const Game = () => {
     const [pokemonList, setPokemonList] = useState([]);
@@ -21,7 +23,6 @@ const Game = () => {
         setCurrentPokemon(pokemonList[0]);
     }, [pokemonList]);
 
-
     // function that gets a number of random unique elements from a given array
     const getRandomPokemon = (array, count) => {
         let randomPokemon = [];
@@ -37,7 +38,7 @@ const Game = () => {
     };
 
     useEffect(() => {
-        // fetch 151 pokemon from offset 0
+        // fetch 151 pokemon from offset 0 on mount
         fetchPokemonList(151, 0)
             .then(r => {
                 // get 10 random pokemon
@@ -77,14 +78,23 @@ const Game = () => {
                         flexDirection: 'column',
                         alignItems: 'center',
                     }}
+                    onClick={() => {
+                        // for debugging purposes: clicking anywhere on the screen will change the current pokemon
+                        const randomIndex = Math.floor(Math.random() * pokemonList.length);
+                        setCurrentPokemon(pokemonList[randomIndex]);
+                    }}
                 >
+                    <Typography variant="h5" align={"center"}>
+                        Left Click on this Box to change the Pokemon
+                    </Typography>
                     {currentPokemon &&
                         <PokemonCard pokemon={currentPokemon}/>
                     }
                 </Box>
             </Container>
         </Box>
-    );
+    )
+        ;
 }
 
 export default Game;
