@@ -29,7 +29,7 @@ const Game = () => {
                         <MdCatchingPokemon />
                     </Avatar>
                     <Typography component='h1' variant='h5'>
-                        Pokemon ssssilhouette goes here
+                        Pokemon silhouette goes here
                     </Typography>
                 </Box>
             </Container>
