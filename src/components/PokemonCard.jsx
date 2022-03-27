@@ -1,10 +1,11 @@
-import {Badge, Card, CardActionArea, CardContent, CardMedia, Chip} from "@mui/material";
+import {Card, CardActionArea, CardContent, CardMedia, Chip} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import React, {useEffect, useState} from "react";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import {getPokemonTypeColors, typeToColor} from "../utils/pokemonUtils";
 import {getLinearGradientFromColors} from "../utils/utils";
+
 
 const PokemonCard = ({pokemon}) => {
     const [combinedColor, setCombinedColor] = useState(getLinearGradientFromColors(getPokemonTypeColors(pokemon.types)));
@@ -13,7 +14,7 @@ const PokemonCard = ({pokemon}) => {
         setCombinedColor(getLinearGradientFromColors(getPokemonTypeColors(pokemon.types)));
     }, [pokemon]);
 
-
+    // ToDo: de adaugat un field pentru a ghici numele pokemonului
     return (
         <Card sx={{width: "33vw", minWidth: "300px", height: "auto"}}>
             <CardActionArea
