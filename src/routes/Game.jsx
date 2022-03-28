@@ -78,11 +78,6 @@ const Game = () => {
                         flexDirection: 'column',
                         alignItems: 'center',
                     }}
-                    onClick={() => {
-                        // for debugging purposes: clicking anywhere on the screen will change the current pokemon
-                        const randomIndex = Math.floor(Math.random() * pokemonList.length);
-                        setCurrentPokemon(pokemonList[randomIndex]);
-                    }}
                 >
                     <Typography variant="h5" align={"center"}>
                         Left Click on this Box to change the Pokemon
