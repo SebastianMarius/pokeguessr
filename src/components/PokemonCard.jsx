@@ -81,6 +81,7 @@ const PokemonCard = ({ pokemon, onGuessPokemon }) => {
             {/* {pokemon.name} */}
             {console.log(pokemon)}
             <Input
+              className="pokemon_input"
               placeholder="Pokemon name"
               sx={{
                 borderColor: typeToColor(pokemon.types[0]),
