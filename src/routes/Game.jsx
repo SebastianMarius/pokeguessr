@@ -1,4 +1,5 @@
 import * as React from "react";
+import {useNavigate,createSearchParams} from "react-router-dom"
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import { useEffect, useState } from "react";
@@ -10,6 +11,7 @@ const Game = () => {
   const [pokemonList, setPokemonList] = useState([]);
   const [pokemonIndex, setPokemonIndex] = useState(null);
   const [score, setScore] = useState(0);
+  const navigate = useNavigate();
 
   // function that fetches a given number of pokemon from the given offset
   const fetchPokemonList = async (count, offset) => {
@@ -74,16 +76,16 @@ const Game = () => {
        setScore(score+1);
    }
    setPokemonIndex(pokemonIndex + 1);
-   console.log("seby",pokemonIndex)
-   if(pokemonIndex===9){
-    onLastPokemon();
+   console.log("seby",pokemonIndex,getRandomPokemon)
+   if(pokemonIndex===pokemonList.length-1){
+    navigate({
+      pathname: '/result',
+      search: `?${createSearchParams({score:score})}`
+    });
    }
   };
 
-  const onLastPokemon=()=>{
-
-  }
-
+ 
   useEffect(() => {
     console.log("current score: ", score);
   }, [score]);
