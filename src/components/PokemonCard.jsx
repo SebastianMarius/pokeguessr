@@ -98,6 +98,7 @@ const PokemonCard = ({ pokemon, onGuessPokemon }) => {
                     }} 
                     
                 onClick={()=>{
+                  console.log("test")
                     onGuessPokemon(pokemonName === pokemon.name);
                     setPokemonName('');
                     

@@ -8,7 +8,7 @@ import { Typography } from "@mui/material";
 
 const Game = () => {
   const [pokemonList, setPokemonList] = useState([]);
-  const [currentPokemon, setCurrentPokemon] = useState(null);
+  const [pokemonIndex, setPokemonIndex] = useState(null);
   const [score, setScore] = useState(0);
 
   // function that fetches a given number of pokemon from the given offset
@@ -22,7 +22,7 @@ const Game = () => {
   // log pokemonList on change
   useEffect(() => {
     console.log("pokemonList: ", pokemonList);
-    setCurrentPokemon(pokemonList[0]);
+    setPokemonIndex(0);
   }, [pokemonList]);
 
   // function that gets a number of random unique elements from a given array
@@ -73,7 +73,12 @@ const Game = () => {
    if (isCorect){
        setScore(score+1);
    }
+   setPokemonIndex(pokemonIndex + 1);
   };
+
+  useEffect(() => {
+    console.log("current score: ", score);
+  }, [score]);
 
   return (
     <Box
@@ -91,16 +96,11 @@ const Game = () => {
             flexDirection: "column",
             alignItems: "center",
           }}
-          onClick={() => {
-            // for debugging purposes: clicking anywhere on the screen will change the current pokemon
-            const randomIndex = Math.floor(Math.random() * pokemonList.length);
-            setCurrentPokemon(pokemonList[randomIndex]);
-          }}
         >
           <Typography variant="h5" align={"center"}>
             Left Click on this Box to change the Pokemon
           </Typography>
-          {currentPokemon && <PokemonCard pokemon={currentPokemon} onGuessPokemon={onGuessPokemon}/>}
+          {pokemonList[pokemonIndex] && <PokemonCard pokemon={pokemonList[pokemonIndex]} onGuessPokemon={onGuessPokemon}/>}
         </Box>
       </Container>
     </Box>
