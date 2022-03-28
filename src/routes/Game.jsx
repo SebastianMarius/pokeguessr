@@ -74,7 +74,15 @@ const Game = () => {
        setScore(score+1);
    }
    setPokemonIndex(pokemonIndex + 1);
+   console.log("seby",pokemonIndex)
+   if(pokemonIndex===9){
+    onLastPokemon();
+   }
   };
+
+  const onLastPokemon=()=>{
+
+  }
 
   useEffect(() => {
     console.log("current score: ", score);
