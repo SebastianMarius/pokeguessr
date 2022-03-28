@@ -88,6 +88,14 @@ const PokemonCard = ({ pokemon, onGuessPokemon }) => {
                 
               }}
               value={pokemonName}
+
+              onKeyDown={(e)=>{
+                if(e.code==="Enter"){
+                    onGuessPokemon(pokemonName === pokemon.name);
+                    setPokemonName('');
+                }
+            }}
+            
               onChange={(e)=>{setPokemonName(e.target.value)}}
             />
             <Button variant="contained"
@@ -96,8 +104,11 @@ const PokemonCard = ({ pokemon, onGuessPokemon }) => {
                     bgcolor:typeToColor(pokemon.types[0]),
                     borderRadius:2
                     }} 
-                    
-                onClick={()=>{
+                
+              
+
+                
+                onClick={()=>{  
                   console.log("test")
                     onGuessPokemon(pokemonName === pokemon.name);
                     setPokemonName('');
