@@ -22,6 +22,9 @@ const PokemonCard = ({ pokemon, onGuessPokemon }) => {
     getLinearGradientFromColors(getPokemonTypeColors(pokemon.types))
   );
   const [pokemonName, setPokemonName] = useState();
+
+  let color_of_pokemon;
+
   const onSubmit = () => {
     onGuessPokemon(pokemonName.toLowerCase() === pokemon.name.toLowerCase());
     setPokemonName("");
@@ -54,6 +57,7 @@ const PokemonCard = ({ pokemon, onGuessPokemon }) => {
       <CardContent>
         <Box display={"flex"} width={"100%"} justifyContent={"space-between"}>
           {pokemon.types.map((type, index) => (
+              
             <Chip
               key={index}
               label={type}
@@ -107,9 +111,14 @@ const PokemonCard = ({ pokemon, onGuessPokemon }) => {
               }}
             />
           </Box>
+            {console.log(take_color(pokemon))}
           <Button
             variant="contained"
             sx={{
+              '&:hover':{
+                
+                bgcolor:take_color(pokemon)
+              },
               bgcolor: typeToColor(pokemon.types[0]),
               borderRadius: "25px",
               padding: "8px 30px 6px 30px",
@@ -135,4 +144,12 @@ PokemonCard.propTypes = {
   }),
 };
 
+
 export default PokemonCard;
+
+const take_color= (pokemon) =>{
+  let color;
+  pokemon.types[1] ?  color=typeToColor(pokemon.types[1]) : color=typeToColor(pokemon.types[0]);
+  return color;
+
+}
