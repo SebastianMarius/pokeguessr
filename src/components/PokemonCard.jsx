@@ -22,12 +22,19 @@ const PokemonCard = ({ pokemon, onGuessPokemon }) => {
     getLinearGradientFromColors(getPokemonTypeColors(pokemon.types))
   );
   const [pokemonName, setPokemonName] = useState();
-
-  let color_of_pokemon;
+  const [error, setError] = useState(false);
+  const[placeHolder, setPlaceHolder]= useState('Enter pokemon name...');
 
   const onSubmit = () => {
-    onGuessPokemon(pokemonName.toLowerCase() === pokemon.name.toLowerCase());
+    if(pokemonName){
+      onGuessPokemon(pokemonName.toLowerCase() === pokemon.name.toLowerCase());
     setPokemonName("");
+    }else{
+      setError(true);
+      setPlaceHolder("Pokemon name can't be null...")
+    }
+    
+   
   };
   useEffect(() => {
     setCombinedColor(
@@ -94,11 +101,23 @@ const PokemonCard = ({ pokemon, onGuessPokemon }) => {
           >
             <Input
               className="pokemon_input"
-              placeholder="Enter pokemon name..."
+              placeholder={placeHolder}
               inputProps={ariaLabel}
               sx={{
+                ...(error &&{
+                  ':before':{
+                  
+                    borderBottom:'1 solid',
+                    borderColor:'red',
+                    color:'red',
+                    
+                  },
+                 
+                }),
                 width: 250,
+              
                 borderColor: typeToColor(pokemon.types[0]),
+                borderBottom: 'red',
               }}
               value={pokemonName}
               onKeyDown={(e) => {
@@ -109,7 +128,7 @@ const PokemonCard = ({ pokemon, onGuessPokemon }) => {
               onChange={(e) => {
                 setPokemonName(e.target.value);
               }}
-            />
+            isRequired />
           </Box>
             {console.log(take_color(pokemon))}
           <Button
