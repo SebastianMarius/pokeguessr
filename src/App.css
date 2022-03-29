@@ -1,6 +1,20 @@
 .App {
   text-align: center;
+  background-position: center;
 }
+
+#root{
+
+  background: linear-gradient(
+    to right bottom,
+    rgba(0, 117, 190, 0.9),
+    rgba(255, 204, 0, 0.7)
+);
+
+ 
+}
+
+
 
 body {
   font-family: Roboto, sans-serif;
@@ -42,4 +56,6 @@ body {
 .MuiInput-root:after{
   border-bottom-color: #6d0cc7 !important ;
 } 
+
+
 
