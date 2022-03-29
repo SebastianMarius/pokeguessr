@@ -37,3 +37,9 @@ body {
     transform: rotate(360deg);
   }
 }
+
+
+.MuiInput-root:after{
+  border-bottom-color: #6d0cc7 !important ;
+} 
+

@@ -14,6 +14,8 @@ import { getLinearGradientFromColors } from "../utils/utils";
 import Input from "@mui/material/Input";
 import Button from "@mui/material/Button";
 
+const ariaLabel = { 'aria-label': 'description' };
+
 // functie dau ca param boolean daca i corect sau nu
 const PokemonCard = ({ pokemon, onGuessPokemon }) => {
   const [combinedColor, setCombinedColor] = useState(
@@ -89,7 +91,9 @@ const PokemonCard = ({ pokemon, onGuessPokemon }) => {
             <Input
               className="pokemon_input"
               placeholder="Pokemon name"
+              inputProps={ariaLabel}
               sx={{
+           
                 width: "90%",
                 borderColor: typeToColor(pokemon.types[0]),
               }}
