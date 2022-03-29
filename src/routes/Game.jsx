@@ -108,7 +108,7 @@ const Game = () => {
           }}
         >
           <Typography variant="h5" align={"center"}>
-            Left Click on this Box to change the Pokemon
+        
           </Typography>
           {pokemonList[pokemonIndex] && <PokemonCard pokemon={pokemonList[pokemonIndex]} onGuessPokemon={onGuessPokemon}/>}
         </Box>

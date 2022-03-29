@@ -6,12 +6,10 @@
 #root{
 
   background: linear-gradient(
-    to right bottom,
-    rgba(0, 117, 190, 0.9),
-    rgba(255, 204, 0, 0.7)
-);
+    to  bottom,
+    rgba(189,55,54, 0.2),
+    rgba(252,252,252, 0.9));
 
- 
 }
 
 
@@ -57,5 +55,7 @@ body {
   border-bottom-color: #6d0cc7 !important ;
 } 
 
-
+input{
+  text-align: center ;
+}
 

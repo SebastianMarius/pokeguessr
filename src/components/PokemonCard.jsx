@@ -34,7 +34,7 @@ const PokemonCard = ({ pokemon, onGuessPokemon }) => {
 
   // ToDo: de adaugat un field pentru a ghici numele pokemonului
   return (
-    <Card sx={{ width: "33vw", minWidth: "300px", height: "auto", }}>
+    <Card sx={{ width: "28vw", minWidth: "300px", height: "auto", }}>
       <CardActionArea
         sx={{
           display: "flex",
@@ -90,11 +90,10 @@ const PokemonCard = ({ pokemon, onGuessPokemon }) => {
           >
             <Input
               className="pokemon_input"
-              placeholder="Pokemon name"
+              placeholder="Enter pokemon name..."
               inputProps={ariaLabel}
               sx={{
-           
-                width: "90%",
+                width: 250,
                 borderColor: typeToColor(pokemon.types[0]),
               }}
               value={pokemonName}
