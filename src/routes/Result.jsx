@@ -54,21 +54,22 @@ const Result = () => {
 
           <Button
             variant="contained"
-            sx={{
-              borderRadius: "25px",
-              padding: "8px 30px 6px 30px",
-              border: "2px rgb(55,55,55) solid",
-              color: "rgb(55,55,55)",
-              textAlign: "center",
-              background:
-                "linear-gradient(0deg, white 50%, rgb(189,55,54) 50%)",
+            endIcon={<FaUndo />}
+            component={Link}
+            to="/game"
+            style={{
+              textTransform: "none",
+              fontSize: "1.2rem",
+              fontWeight: "bold",
+              marginTop: "1rem",
+              width: "20vw",
+              minWidth: "200px",
             }}
             onClick={() => {
               resetScore();
             }}
           >
             Restart Quiz
-            <FaUndo />
           </Button>
         </Box>
       </Container>
