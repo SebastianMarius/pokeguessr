@@ -1,5 +1,5 @@
 import * as React from "react";
-import {useNavigate,createSearchParams} from "react-router-dom"
+import { useNavigate, createSearchParams } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import { useEffect, useState } from "react";
@@ -72,20 +72,27 @@ const Game = () => {
   }, []);
 
   const onGuessPokemon = (isCorect) => {
-   if (isCorect){
-       setScore(score+1);
-   }
-   setPokemonIndex(pokemonIndex + 1);
-   console.log("seby",pokemonIndex,getRandomPokemon)
-   if(pokemonIndex===pokemonList.length-1){
-    navigate({
-      pathname: '/result',
-      search: `?${createSearchParams({score:score})}`
-    });
-   }
+    setPokemonIndex(pokemonIndex + 1);
+    console.log("Paul", pokemonIndex, pokemonList);
+    if (pokemonIndex === pokemonList.length - 1) {
+      if (isCorect) {
+        navigate({
+          pathname: "/result",
+          search: `?${createSearchParams({ score: score + 1 })}`,
+        });
+      } else {
+        navigate({
+          pathname: "/result",
+          search: `?${createSearchParams({ score: score })}`,
+        });
+      }
+    }
+
+    if (isCorect) {
+      setScore(score + 1);
+    }
   };
 
- 
   useEffect(() => {
     console.log("current score: ", score);
   }, [score]);
@@ -107,10 +114,13 @@ const Game = () => {
             alignItems: "center",
           }}
         >
-          <Typography variant="h5" align={"center"}>
-        
-          </Typography>
-          {pokemonList[pokemonIndex] && <PokemonCard pokemon={pokemonList[pokemonIndex]} onGuessPokemon={onGuessPokemon}/>}
+          <Typography variant="h5" align={"center"}></Typography>
+          {pokemonList[pokemonIndex] && (
+            <PokemonCard
+              pokemon={pokemonList[pokemonIndex]}
+              onGuessPokemon={onGuessPokemon}
+            />
+          )}
         </Box>
       </Container>
     </Box>
