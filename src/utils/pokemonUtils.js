@@ -44,9 +44,8 @@ export const typeToColor = (type) => {
 
 // function that combines all pokemon type colors in linear gradient
 export const getPokemonTypeColors = (types) => {
-    console.log("types: ", types);
     const colors = types.map(type => typeToColor(type));
     if (colors.length === 1)
         colors.push(colors[0]);
-    return colors.join(', ');
+    return colors;
 }
