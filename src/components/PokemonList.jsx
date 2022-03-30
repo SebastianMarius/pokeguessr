@@ -10,7 +10,7 @@ import Box from "@mui/material/Box";
 
 export default function PokemonList() {
   return (
-    <List sx={{ width: "100%",minWidth:"300px", maxWidth: "40%" }}>
+    <List sx={{ width: "100%", minWidth: "300px", maxWidth: "40%" }}>
       <ListItem
         sx={{
           background: "linear-gradient(0deg, white 50%, rgb(189,55,54) 50%)",
@@ -29,10 +29,10 @@ export default function PokemonList() {
             color: "white",
             borderRadius: "10px",
             padding: "10px",
-            display:'flex',
+            display: "flex",
           }}
         >
-          <FaCheck  />
+          <FaCheck />
         </Box>
       </ListItem>
     </List>
