@@ -80,7 +80,7 @@ const Game = () => {
             } else {
                 navigate({
                     pathname: "/result",
-                    search: `?${createSearchParams({ score: score })}`,
+                    search: `?${createSearchParams({score: score})}`,
                 });
             }
         }

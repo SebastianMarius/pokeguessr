@@ -3,7 +3,7 @@ import {
     CardActionArea,
     CardContent,
     CardMedia,
-    Chip,
+    Chip, CircularProgress,
 } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import React, {useEffect, useMemo, useState} from "react";
@@ -25,11 +25,17 @@ const PokemonCard = ({pokemon, onGuessPokemon}) => {
 
     const [pokemonName, setPokemonName] = useState("");
     const [error, setError] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [image, setImage] = useState({});
 
-    // log error in useEffect
     useEffect(() => {
-        console.log("error", error);
-    }, [error]);
+        // make this happen after 400 ms
+        setIsLoaded(false);
+        const img = new Image();
+        img.src = pokemon.image;
+        img.onload = handleImageLoaded;
+        setImage(img);
+    }, [pokemon.image]);
 
     const handleGuess = () => {
         if (pokemonName) {
@@ -38,6 +44,12 @@ const PokemonCard = ({pokemon, onGuessPokemon}) => {
         } else {
             setError(true);
         }
+    };
+
+
+    const handleImageLoaded = () => {
+        // make this happen after 2 seconds
+        setIsLoaded(true);
     };
 
     // ToDo: de adaugat un field pentru a ghici numele pokemonului
@@ -51,13 +63,19 @@ const PokemonCard = ({pokemon, onGuessPokemon}) => {
                     backgroundImage: pokemonGradient,
                 }}
             >
-                <CardMedia
-                    component="img"
-                    height="auto"
-                    image={pokemon.image}
-                    alt={pokemon.name}
-                    sx={{maxHeight: "60%", maxWidth: "50%", filter: "brightness(0%)"}}
-                />
+                {isLoaded ?
+                    <CardMedia
+                        component="img"
+                        height="auto"
+                        image={image.src}
+                        alt={pokemon.name}
+                        sx={{maxHeight: "60%", maxWidth: "50%", filter: "brightness(0%)"}}
+                    />
+                    :
+                    <Box display="flex" alignItems={"center"} justifyContent="center" minHeight={"200px"}>
+                        <CircularProgress style={{color: "black"}}/>
+                    </Box>
+                }
             </CardActionArea>
             <CardContent>
                 <Box display={"flex"} width={"100%"} justifyContent={"space-between"}>
