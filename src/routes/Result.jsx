@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import { FaUndo } from "react-icons/fa";
 import logo from "../logo.jpg";
 import { Link } from "react-router-dom";
+import PokemonList from "../components/PokemonList";
 
 const Result = () => {
   const [searchParams] = useSearchParams({});
@@ -38,12 +39,13 @@ const Result = () => {
           <Link to="/">
             <img src={logo} className="App-logo" alt="logo" />
           </Link>
-
+          <PokemonList />
           <Typography
             component="h1"
             variant="h3"
             sx={{ fontWeight: "bold", margin: "0.5rem" }}
             textAlign="center"
+            color="rgb(55,55,55)"
           >
             Your score is: {score}
           </Typography>
@@ -52,10 +54,11 @@ const Result = () => {
             sx={{
               borderRadius: "25px",
               padding: "8px 30px 6px 30px",
-              border: "2px black solid",
-              color: "black",
+              border: "2px rgb(55,55,55) solid",
+              color: "rgb(55,55,55)",
               textAlign: "center",
-              background: "linear-gradient(0deg, white 50%, red 50%)",
+              background:
+                "linear-gradient(0deg, white 50%, rgb(189,55,54) 50%)",
             }}
             onClick={() => {
               resetScore();
