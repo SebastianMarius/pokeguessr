@@ -21,7 +21,7 @@ const PokemonCard = ({pokemon, onGuessPokemon}) => {
     const pokemonColors = useMemo(() => getPokemonTypeColors(pokemon.types), [pokemon.types]);
     const pokemonGradient = useMemo(() => {
         return getLinearGradientFromColors(pokemonColors.join(','));
-    }, [pokemon.types]);
+    }, [pokemonColors]);
 
     const [pokemonName, setPokemonName] = useState("");
     const [error, setError] = useState(false);
