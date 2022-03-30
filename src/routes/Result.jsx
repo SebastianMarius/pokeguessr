@@ -5,6 +5,8 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { FaUndo } from "react-icons/fa";
+import logo from "../logo.jpg";
+import { Link } from "react-router-dom";
 
 const Result = () => {
   const [searchParams] = useSearchParams({});
@@ -33,6 +35,10 @@ const Result = () => {
             alignItems: "center",
           }}
         >
+          <Link to="/">
+            <img src={logo} className="App-logo" alt="logo" />
+          </Link>
+
           <Typography
             component="h1"
             variant="h3"
