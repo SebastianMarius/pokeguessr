@@ -29,8 +29,12 @@ const PokemonCard = ({ pokemon, onGuessPokemon }) => {
     if(pokemonName){
       onGuessPokemon(pokemonName.toLowerCase() === pokemon.name.toLowerCase());
     setPokemonName("");
+    setError(false);
+    console.log(error);
+
     }else{
       setError(true);
+      console.log(error);
       setPlaceHolder("Pokemon name can't be null...")
     }
     
@@ -100,6 +104,7 @@ const PokemonCard = ({ pokemon, onGuessPokemon }) => {
             margin={"15px 0"}
           >
             <Input
+              error={error}
               className="pokemon_input"
               placeholder={placeHolder}
               inputProps={ariaLabel}
@@ -112,13 +117,22 @@ const PokemonCard = ({ pokemon, onGuessPokemon }) => {
                     color:'red',
                     
                   },
-                 
+             
                 }),
+                ':after':{
+                  
+                  borderBottom:'1 solid',
+                    borderColor:'#6d0cc7',
+                },
+
+               
                 width: 250,
               
                 borderColor: typeToColor(pokemon.types[0]),
-                borderBottom: 'red',
-              }}
+                
+              }
+              
+            }
               value={pokemonName}
               onKeyDown={(e) => {
                 if (e.code === "Enter") {
