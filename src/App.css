@@ -50,17 +50,9 @@ body {
   }
 }
 
-
-.MuiInput-root:after{
-  border-bottom-color: #6d0cc7 !important ;
-} 
-
 input{
   text-align: center ;
 }
 
-.MuiInput-root:before{
-  border-bottom: 1px solid red;
-}
 
 
