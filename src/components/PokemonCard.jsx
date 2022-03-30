@@ -29,7 +29,6 @@ const PokemonCard = ({pokemon, onGuessPokemon}) => {
     const [image, setImage] = useState({});
 
     useEffect(() => {
-        // make this happen after 400 ms
         setIsLoaded(false);
         const img = new Image();
         img.src = pokemon.image;
