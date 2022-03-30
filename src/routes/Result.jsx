@@ -5,6 +5,7 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { FaUndo } from "react-icons/fa";
+import Logo from "../images/game_icon.svg"
 
 const Result = () => {
   const [searchParams] = useSearchParams({});
@@ -23,16 +24,29 @@ const Result = () => {
         minHeight: "100vh",
         width: "100%",
         alignItems: "center",
+        
       }}
     >
+   
+     
       <Container component="main" maxWidth="lg">
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            overflow: 'hidden',
+        position: 'relative',
           }}
         >
+           <img src={Logo} sx={{
+             position: 'absolute',
+             h: "80%",
+             opacity: ".3",
+             top: "10%",
+             width: "50%",
+             zIndex: 0,
+           }} />
           <Typography
             component="h1"
             variant="h3"
@@ -43,7 +57,7 @@ const Result = () => {
           </Typography>
           <Button
             variant="contained"
-            sx={{
+            sx={{ 
               borderRadius: "25px",
               padding: "8px 30px 6px 30px",
               border: "2px black solid",
