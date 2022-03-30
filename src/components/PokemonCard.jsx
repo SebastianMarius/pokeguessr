@@ -41,6 +41,7 @@ const PokemonCard = ({pokemon, onGuessPokemon}) => {
         if (pokemonName) {
             onGuessPokemon(pokemonName.toLowerCase() === pokemon.name.toLowerCase());
             setPokemonName("");
+            setError(false);
         } else {
             setError(true);
         }
@@ -120,9 +121,19 @@ const PokemonCard = ({pokemon, onGuessPokemon}) => {
                             placeholder={"Enter the name of the Pokemon"}
                             error={error}
                             sx={{
+                                ...(error && {
+                                    ':before': {
+                                        borderBottom: '1 solid',
+                                        borderColor: 'red',
+                                        color: 'red',
+                                    },
+                                }),
+                                ':after': {
+                                    borderBottom: '1 solid',
+                                    borderColor: pokemonColors[0],
+                                },
                                 width: 250,
                                 borderColor: pokemonColors[0],
-                                borderBottom: 'red',
                             }}
                             value={pokemonName}
                             onKeyDown={(e) => {
