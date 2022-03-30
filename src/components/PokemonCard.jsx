@@ -13,6 +13,7 @@ import {getPokemonTypeColors, typeToColor} from "../utils/pokemonUtils";
 import {getLinearGradientFromColors} from "../utils/utils";
 import Input from "@mui/material/Input";
 import Button from "@mui/material/Button";
+import { motion } from "framer-motion"
 
 const ariaLabel = {'aria-label': 'description'};
 
@@ -29,7 +30,6 @@ const PokemonCard = ({pokemon, onGuessPokemon}) => {
     const [image, setImage] = useState({});
 
     useEffect(() => {
-        // make this happen after 400 ms
         setIsLoaded(false);
         const img = new Image();
         img.src = pokemon.image;
@@ -45,7 +45,6 @@ const PokemonCard = ({pokemon, onGuessPokemon}) => {
             setError(true);
         }
     };
-
 
     const handleImageLoaded = () => {
         // make this happen after 2 seconds
@@ -70,6 +69,7 @@ const PokemonCard = ({pokemon, onGuessPokemon}) => {
                         image={image.src}
                         alt={pokemon.name}
                         sx={{maxHeight: "60%", maxWidth: "50%", filter: "brightness(0%)"}}
+                        animate={{filter: "brightness(100%)"}}
                     />
                     :
                     <Box display="flex" alignItems={"center"} justifyContent="center" minHeight={"200px"}>
