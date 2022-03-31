@@ -58,6 +58,7 @@ const Result = () => {
             component={Link}
             to="/game"
             style={{
+              backgroundColor: "rgb(189,55,54)",
               textTransform: "none",
               fontSize: "1.2rem",
               fontWeight: "bold",

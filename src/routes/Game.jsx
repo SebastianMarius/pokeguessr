@@ -18,6 +18,7 @@ const Game = () => {
         const a = await fetch(
             `https://pokeapi.co/api/v2/pokemon?limit=${count}&offset=${offset}`
         );
+        
         return await a.json();
     };
 
@@ -48,6 +49,7 @@ const Game = () => {
                     return fetch(pokemon.url)
                         .then((r) => r.json())
                         .then((r) => {
+                            console.log(r)
                             return {
                                 name: capitalizeFirstLetter(r.name),
                                 image: r.sprites.other["official-artwork"].front_default,
@@ -62,7 +64,7 @@ const Game = () => {
                 Promise.all(pokemonPromises).then((r) => {
                     setPokemonList(r);
                 });
-
+                
                 setPokemonIndex(0);
             })
             .catch((e) => console.error(e));
@@ -70,7 +72,7 @@ const Game = () => {
 
     const onGuessPokemon = (isCorrect) => {
         setPokemonIndex(pokemonIndex + 1);
-
+        
         if (pokemonIndex === pokemonList.length - 1) {
             if (isCorrect) {
                 navigate({

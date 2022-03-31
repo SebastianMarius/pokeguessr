@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 
 function App() {
+
   return (
     <Box
       className="App"
@@ -26,6 +27,7 @@ function App() {
           component={Link}
           to="/game"
           style={{
+            backgroundColor: "rgb(189,55,54)",
             textTransform: "none",
             fontSize: "1.2rem",
             fontWeight: "bold",
