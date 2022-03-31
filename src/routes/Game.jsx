@@ -1,40 +1,31 @@
 import * as React from "react";
-import {useNavigate, createSearchParams} from "react-router-dom"
+import {useNavigate} from "react-router-dom"
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import {useEffect, useState} from "react";
-import PokemonCard from "../components/PokemonCard";
-import {capitalizeFirstLetter} from "../utils/utils";
+import PokemonCard from "../components/PokemonCard/PokemonCard";
+import {capitalizeFirstLetter, getRandomUniqueElements} from "../utils/utils";
 import {Typography} from "@mui/material";
 
 const Game = () => {
     const [pokemonList, setPokemonList] = useState([]);
     const [pokemonIndex, setPokemonIndex] = useState(null);
+    const [guessList, setGuessList] = useState([]);
     const [score, setScore] = useState(0);
     const navigate = useNavigate();
 
-    // function that fetches a given number of pokemon from the given offset
+    /**
+     * @description Function that fetches a given number of pokemon from the given offset
+     * @param count - number of pokemon to fetch
+     * @param offset - offset to start fetching from
+     * @returns {Promise<any>} - promise that resolves to the pokemon list
+     */
     const fetchPokemonList = async (count, offset) => {
         const a = await fetch(
             `https://pokeapi.co/api/v2/pokemon?limit=${count}&offset=${offset}`
         );
-        
+
         return await a.json();
-    };
-
-
-    // function that gets a number of random unique elements from a given array
-    const getRandomPokemon = (array, count) => {
-        let randomPokemon = [];
-        for (let i = 0; i < count; i++) {
-            const randomIndex = Math.floor(Math.random() * array.length);
-            if (randomPokemon.includes(array[randomIndex])) {
-                i--;
-            } else {
-                randomPokemon.push(array[randomIndex]);
-            }
-        }
-        return randomPokemon;
     };
 
     useEffect(() => {
@@ -42,17 +33,17 @@ const Game = () => {
         fetchPokemonList(151, 0)
             .then((r) => {
                 // get 10 random pokemon
-                const pokemonList = getRandomPokemon(r.results, 10);
+                const pokemonList = getRandomUniqueElements(r.results, 10);
 
                 // add a promise fetch for each pokemon to an array of promises then do promise.all to get all pokemon
                 const pokemonPromises = pokemonList.map((pokemon) => {
                     return fetch(pokemon.url)
                         .then((r) => r.json())
                         .then((r) => {
-                            console.log(r)
                             return {
                                 name: capitalizeFirstLetter(r.name),
                                 image: r.sprites.other["official-artwork"].front_default,
+                                sprite: r.sprites.front_default,
                                 id: r.id,
                                 description: r.description,
                                 types: r.types.map((t) => t.type.name),
@@ -64,34 +55,40 @@ const Game = () => {
                 Promise.all(pokemonPromises).then((r) => {
                     setPokemonList(r);
                 });
-                
+
                 setPokemonIndex(0);
             })
             .catch((e) => console.error(e));
     }, []);
 
-    const onGuessPokemon = (isCorrect) => {
-        setPokemonIndex(pokemonIndex + 1);
-        
+    /**
+     * Function that handles the guess of a pokemon by the user and updates the state
+     * @param isCorrect - boolean, true if the guess was correct, false otherwise
+     * @param userGuess - string, the guess made by the user
+     */
+    const onGuessPokemon = (isCorrect, userGuess) => {
+        const newGuessList = [...guessList, {
+            isCorrect: isCorrect,
+            userGuess: userGuess,
+            pokemon: pokemonList[pokemonIndex]
+        }];
+
+        // handle finished game
         if (pokemonIndex === pokemonList.length - 1) {
-            if (isCorrect) {
-                navigate({
-                    pathname: '/result',
-                    search: `?${createSearchParams({score: score + 1})}`
-                });
-            } else {
-                navigate({
-                    pathname: "/result",
-                    search: `?${createSearchParams({score: score})}`,
-                });
-            }
+            navigate("/result", {
+                state: {
+                    score: isCorrect ? score + 1 : score,
+                    guessList: newGuessList,
+                },
+            });
         }
 
-        if (isCorrect) {
+        // update game state with new guess
+        setGuessList(newGuessList);
+        setPokemonIndex(pokemonIndex + 1);
+        if (isCorrect)
             setScore(score + 1);
-        }
     };
-
 
     return (
         <Box
@@ -114,7 +111,7 @@ const Game = () => {
 
                     </Typography>
                     {pokemonList[pokemonIndex] &&
-                    <PokemonCard pokemon={pokemonList[pokemonIndex]} onGuessPokemon={onGuessPokemon}/>}
+                        <PokemonCard pokemon={pokemonList[pokemonIndex]} onGuessPokemon={onGuessPokemon}/>}
                 </Box>
             </Container>
         </Box>

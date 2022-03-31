@@ -1,81 +1,98 @@
-import React from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {useLocation, useNavigate} from "react-router-dom";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { FaUndo } from "react-icons/fa";
+import {FaUndo} from "react-icons/fa";
 import logo from "../logo.jpg";
-import { Link } from "react-router-dom";
-import PokemonList from "../components/PokemonList";
+import {Link} from "react-router-dom";
+import PokemonGuessList from "../components/PokemonGuessList/PokemonGuessList";
 
 const Result = () => {
-  const [searchParams] = useSearchParams({});
-  const score = searchParams.get("score");
-  const navigate = useNavigate();
-  const resetScore = () => {
-    navigate({
-      pathname: "/game",
-    });
-  };
+    const [showCorrect, setShowCorrect] = useState(false);
+    const {score, guessList} = useLocation().state;
+    const onlyIncorrectGuesses = guessList.filter(guess => !guess.isCorrect);
+    const navigate = useNavigate();
 
-  return (
-    <Box
-      sx={{
+    const resetScore = () => {navigate("/game");};
+
+    const toggleShowCorrect = () => {setShowCorrect(!showCorrect);};
+
+    return (
+        <Box sx={styles.container}>
+            <Container component="main" maxWidth="lg" margin="auto">
+                <Box
+                    sx={styles.containerBox}
+                >
+                    <Link to="/">
+                        <img src={logo} className="App-logo" alt="logo"/>
+                    </Link>
+
+                    <Typography
+                        variant="h3"
+                        style={styles.scoreText}
+                    >
+                        Your score is: {score}
+                    </Typography>
+
+                    <Button
+                        variant="contained"
+                        endIcon={<FaUndo/>}
+                        component={Link}
+                        to="/game"
+                        style={styles.restartButton}
+                        onClick={resetScore}
+                    >
+                        Restart Quiz
+                    </Button>
+
+                    <Typography
+                        variant={"h4"}
+                        textAlign={"center"}
+                        marginTop={4}
+                        fontWeight="300"
+                    >
+                        Here are your guesses...
+                    </Typography>
+
+                    <Button sx={{marginTop: "10px", color: showCorrect ? "green" : "red"}} onClick={toggleShowCorrect}>{showCorrect ? "Show All" : "Show Only Incorrect"}</Button>
+
+                    <PokemonGuessList guessList={showCorrect ? guessList : onlyIncorrectGuesses}/>
+
+                </Box>
+            </Container>
+        </Box>
+    );
+};
+
+const styles = {
+    container: {
         display: "flex",
         minHeight: "100vh",
         width: "100%",
         alignItems: "center",
-      }}
-    >
-      <Container component="main" maxWidth="lg" margin="auto">
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Link to="/">
-            <img src={logo} className="App-logo" alt="logo" />
-          </Link>
-
-          <Typography
-            component="h1"
-            variant="h3"
-            sx={{ fontWeight: "bold", margin: "0.5rem" }}
-            textAlign="center"
-            color="rgb(55,55,55)"
-          >
-            Your score is: {score}
-          </Typography>
-
-          <PokemonList />
-
-          <Button
-            variant="contained"
-            endIcon={<FaUndo />}
-            component={Link}
-            to="/game"
-            style={{
-              backgroundColor: "rgb(189,55,54)",
-              textTransform: "none",
-              fontSize: "1.2rem",
-              fontWeight: "bold",
-              marginTop: "1rem",
-              width: "20vw",
-              minWidth: "200px",
-            }}
-            onClick={() => {
-              resetScore();
-            }}
-          >
-            Restart Quiz
-          </Button>
-        </Box>
-      </Container>
-    </Box>
-  );
-};
+    },
+    containerBox: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+    },
+    restartButton: {
+        backgroundColor: "rgb(189,55,54)",
+        textTransform: "none",
+        fontSize: "1.2rem",
+        fontWeight: "bold",
+        marginTop: "1rem",
+        width: "20vw",
+        minWidth: "200px",
+    },
+    scoreText: {
+        fontWeight: "bold",
+        margin: "0.5rem",
+        textAlign: "center",
+        color: "rgb(55,55,55)",
+    }
+}
 
 export default Result;
