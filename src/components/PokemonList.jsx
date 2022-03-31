@@ -8,7 +8,6 @@ import ImageIcon from "@mui/icons-material/Image";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { height } from "@mui/system";
 
 export default function PokemonList(props) {
   /* const { pokemon, userGuess, isCorrect } = props; */
