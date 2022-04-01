@@ -3,17 +3,6 @@
   background-position: center;
 }
 
-#root{
-
-  background: linear-gradient(
-    to  bottom,
-    rgba(189,55,54, 0.2),
-    rgba(252,252,252, 0.9));
-
-}
-
-
-
 body {
   font-family: Roboto, sans-serif;
 }
@@ -28,8 +17,6 @@ body {
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
-
 
 .App-header {
   background-color: #e0e0e0;
@@ -50,9 +37,6 @@ body {
   }
 }
 
-input{
-  text-align: center ;
+input {
+  text-align: center;
 }
-
-
-
