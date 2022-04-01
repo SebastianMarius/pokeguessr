@@ -19,8 +19,8 @@ function App() {
       <Box>
         <img src={logo} className="App-logo" alt="logo" />
         <Typography variant="h3" color={"secondary.dark"}>
-          PokeGuessr{" "}
-        </Typography>{" "}
+          PokeGuessr
+        </Typography>
         <Button
           variant="contained"
           endIcon={<FaPlay />}
@@ -36,18 +36,18 @@ function App() {
             minWidth: "200px",
           }}
         >
-          Start Quiz{" "}
-        </Button>{" "}
+          Start Quiz
+        </Button>
         <Box sx={{ p: 4, m: 4 }}>
           <Typography variant="h5" color={"secondary"}>
-            <span style={{ fontWeight: "bold" }}> About </span>{" "}
-          </Typography>{" "}
+            <span style={{ fontWeight: "bold" }}> About </span>
+          </Typography>
           <Typography variant="body1" color={"secondary"}>
-            This is a simple quiz game that will test your knowledge of the{" "}
-            <span style={{ fontWeight: "bold" }}> Pokemon </span>.{" "}
-          </Typography>{" "}
-        </Box>{" "}
-      </Box>{" "}
+            This is a simple quiz game that will test your knowledge of the
+            <span style={{ fontWeight: "bold" }}> Pokemon </span>.
+          </Typography>
+        </Box>
+      </Box>
     </Box>
   );
 }

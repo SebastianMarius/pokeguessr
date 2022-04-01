@@ -112,7 +112,7 @@ const Game = () => {
 
                     </Typography>
                     {pokemonList[pokemonIndex] &&
-                        <PokemonCard pokemon={pokemonList[pokemonIndex]} onGuessPokemon={onGuessPokemon}/>}
+                    <PokemonCard pokemon={pokemonList[pokemonIndex]} onGuessPokemon={onGuessPokemon}/>}
                 </Box>
             </Container>
         </Box>
