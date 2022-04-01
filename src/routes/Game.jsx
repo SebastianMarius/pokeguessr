@@ -28,6 +28,7 @@ const Game = () => {
         return await a.json();
     };
 
+
     useEffect(() => {
         // fetch 151 pokemon from offset 0 on mount
         fetchPokemonList(151, 0)

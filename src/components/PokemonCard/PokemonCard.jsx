@@ -10,6 +10,9 @@ import {motion} from "framer-motion";
 import PokemonCardTitle from "./PokemonCardTitle";
 import PokemonNameReveal from "./PokemonNameReveal";
 import {FaCheckCircle, FaTimesCircle} from "react-icons/fa";
+import useSound from "use-sound";
+import correctSound from "../../assets/correct_ping.mp3";
+// import wrongSound from "../../assets/error_tone.mp3";
 
 const PokemonCard = ({pokemon, onGuessPokemon}) => {
     const pokemonColors = useMemo(() => getPokemonTypeColors(pokemon.types), [pokemon.types]);
@@ -21,6 +24,8 @@ const PokemonCard = ({pokemon, onGuessPokemon}) => {
     const [image, setImage] = useState({});
     const [isGuessed, setIsGuessed] = useState(false);
     const [cardTitle, setCardTitle] = useState(<PokemonCardTitle/>);
+    const [playCorrect] = useSound(correctSound, {volume: 0.1});
+    // const [playWrong] = useSound(wrongSound);
 
     useEffect(() => {
         setIsLoaded(false);
@@ -32,10 +37,15 @@ const PokemonCard = ({pokemon, onGuessPokemon}) => {
 
     const handleGuess = () => {
         if (pokemonName && !isGuessed) {
+            const isCorrect = pokemon.name.toLowerCase() === pokemonName.toLowerCase();
+            if (isCorrect)
+                playCorrect();
+            // else
+            //     playWrong();
             setIsGuessed(true);
             setCardTitle(<PokemonNameReveal name={pokemon.name} color={pokemonColors[0]} guess={pokemonName}/>);
             setTimeout(() => {
-                onGuessPokemon(pokemonName.toLowerCase() === pokemon.name.toLowerCase(), pokemonName);
+                onGuessPokemon(isCorrect, pokemonName);
                 setPokemonName("");
                 setCardTitle(<PokemonCardTitle/>);
                 setIsGuessed(false);
