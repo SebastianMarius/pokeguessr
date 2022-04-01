@@ -23,14 +23,13 @@ export default function PokemonGuessListItem({
         marginY: 2,
         borderRadius: "10px",
         background: "linear-gradient(0deg, white 50%, rgb(189,55,54) 50%)",
-        "&:first-child": {
+        "&:first-of-type": {
           marginTop: 0,
         },
       }}
     >
       <ListItemAvatar>
         <Avatar
-          component={motion.image}
           sx={{
             height: "100px",
             width: "60px",

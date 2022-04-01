@@ -9,7 +9,7 @@ const createSpans = (word, guess, color) => {
     const letter = word[i].toLowerCase();
     const isCorrect = guess.includes(letter);
     const span = (
-      <span key={i} style={{ color: isCorrect ? color : "black" }}>
+      <span key={i} style={{ color: isCorrect ? color : "inherit" }}>
         {word[i]}
       </span>
     );
