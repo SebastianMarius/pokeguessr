@@ -1,5 +1,5 @@
 import Typography from "@mui/material/Typography";
-import React, { useCallback } from "react";
+import React, {useMemo} from "react";
 
 const createSpans = (word, guess, color) => {
   // create spans for each letter and underline every letter that is correct from the guess
@@ -19,10 +19,7 @@ const createSpans = (word, guess, color) => {
 };
 
 const PokemonNameReveal = ({ name, color, guess }) => {
-  const spans = useCallback(
-    () => createSpans(name, guess, color),
-    [name, guess, color]
-  );
+  const spans = useMemo(() => createSpans(name, guess, color), [name]);
 
   return (
     <Typography
